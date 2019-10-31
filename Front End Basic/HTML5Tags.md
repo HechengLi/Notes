@@ -173,5 +173,3 @@ Information are from [here](https://developer.mozilla.org/en-US/docs/Web/HTML).
 >   - `circle`: a circular region.
 >   
 >   - `poly`: a polygon.
-
-
