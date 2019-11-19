@@ -437,3 +437,395 @@ Information are from [here](https://developer.mozilla.org/en-US/docs/Web/HTML).
 > **Attributes**
 > 
 > Global attributes only.
+
+**`<button>` - Button**, [MDN Reference](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button)
+
+> Represents a clickable button.
+> 
+> **Attributes**
+> 
+> - `autofocus`
+>   
+>   A Boolean attribute if true button will have input focus when page loads.
+> 
+> - `disabled`
+>   
+>   A Boolean attribute for disabling the button.
+> 
+> - `form`
+>   
+>   The id of the form the button is associated with, if not present the button is associated with ancestor `<form>` element.
+> 
+> - `formation`
+>   
+>   The URL that processes the information submitted by the button, this will override the `action` attribute of the button's associated form.
+> 
+> - `formenctype`
+>   
+>   If the button is a submit button, this attribute specifies the form data encoding used to submit the form to the server.
+>   
+>   Possble values:
+>   
+>   - `application/x-www-form-urlencoded`: The default value.
+>   
+>   - `multipart/form-data`: Use this if form contains a file type input.
+>   
+>   - `text/plain`: Added to the spec as a debugging aid, shouldn't be used for real form submission.
+>   
+>   Overrides `enctype` of the button's associated form.
+> 
+> - `formmethod`
+>   
+>   If the button is a submit button, this attribute specifies the HTTP method that the browser uses to submit the form.
+>   
+>   Possible values:
+>   
+>   - `post`: The data from the form are included in the body of the HTTP request.
+>   
+>   - `get`: The data from the form are appended to the form's `action` URL with a `?` as a separator.
+>   
+>   Overrides the `method` attribute of the button's associtated form.
+> 
+> - `formnovalidate`
+>   
+>   If the button is a submit button, this attribute specifies the form to not validate when it's submitted.
+>   
+>   Overrides the `novalidate` of the button's associated form.
+> 
+> - `formtarget`
+>   
+>   If the button is a submit button, this attribute specifies where to display the response from submitting the form.
+>   
+>   - `_self`: the current browsing context. **(Default)**
+>   
+>   - `_blank`: usually a new tab, but users can configure browser to open a new window instead.
+>   
+>   - `_parent`: the parent browsing context of the current one. If no parent, behaves as `_self`.
+>   
+>   - `_top`: the topmost browsing context (the "highest" context that's an ancestor of the current one). If not acestors, behaves as `_self`.
+>   
+>   Overrides the `target` of the button's associated form.
+> 
+> - `name`
+>   
+>   Name of button, submitted as a pair with the button's `value` as part of the form data.
+> 
+> - `type`
+>   
+>   Behaviour of the button
+>   
+>   Possible values:
+>   
+>   - `submit`: Submits the form data to server. **(Default)**
+>   
+>   - `reset`: Resets all the controls to their initial values.
+>   
+>   - `button`: Does nothing when clicked.
+> 
+> - `value`
+>   
+>   The inital value of the button, submitted as a pair with the button's `name` as part of the form data.
+
+**`<canvas>` - Graphics Canvas**, [MDN Reference](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas)
+
+> Used with `canvas scripting API` or `WebGL API` to draw graphics and animations.
+> 
+> **Attributes**
+> 
+> - `height`
+>   
+>   Height of the coordinate space in CSS pixels. **(Default: 150px)**
+> 
+> - `moz-opaque`
+>   
+>   Allow canvas to use translucency as a factor, if the canvas knows there's no translucency, painting performance can be optimized.
+>   
+>   Only supported by Mozilla-based browsers.
+>   
+>   Use the standardized `canvas.getContext('2d', { alpha: false })` instead.
+> 
+> - `width`
+>   
+>   Width of the coordinate space in CSS pixels. **(Default: 300px)**
+> 
+> **Usage**
+> 
+> You should provide althernate content inside the `<canvas>` block. That content will be rendered both on older browsers that dont'support canvas and in browsers with JavaScript disabled.
+> 
+> Unlike `<img>` element, `<canvas>` element requires the closing tag `</canvas>`.
+> 
+> Changing the size of canvas with css may cause image to be distorted.
+> 
+> Maximum size of a `<canvas>` is very large, but exact size depends on the browser.
+
+**`<caption>` - Table Caption**, [MDN Reference](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/caption)
+
+> Specifies the caption (or title) of a table, if used should __always__ be the first child of a `<table>` element.
+> 
+> Styling and position relative to the table may be changed using the CSS `caption-side` and `text-align` properties.
+> 
+> **Attributes**
+> 
+> Global attributes only.
+> 
+> **Usage**
+> 
+> When the `<table` element that contains a `<caption>` is the only descendant of a `<figure>` element, you should use the `<figcaption>` element instead of `<caption>`
+
+**`<cite>` - Citation**, [MDN Reference](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/cite)
+
+> Describes a reference to a cited creative work, and must include the title of that work. The reference may be in an abbreviated form according to context-appropriate conventions related to citation metadata.
+> 
+> **Attributes**
+> 
+> Global attributes only.
+
+**`<code>` - Inline Code**, [MDN Reference](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/code)
+
+> Displays its content styled in a fashion intended to indicate that text is a short fragment of computer code. By default, the content text is displayed using the user agent's default monospace font.
+> 
+> **Attributes**
+> 
+> Global attributes only.
+> 
+> **Usage**
+> 
+> To represnet multiple lines of code, wrap`<code>` element within a `<pre>` element. The `<code>` element by itself only represnets a single phrase of code or line of code.
+
+**`<col>` - col**, [MDN Reference](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/col)
+
+> Defines a column within a table and is used for defining common semantics on all common cells.
+> 
+> Generally found within a `<colgroup>` element.
+> 
+> **Attributes**
+> 
+> - `span`
+>   
+>   This attribute contains a positive integer indicating the number of consecutive columns the `<col>` element spans. **(Default: 1)**
+
+**`<colgroup>` - colgroup**, [MDN Reference](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/colgroup)
+
+> Defines a group of clumns within a table.
+> 
+> **Attributes**
+> 
+> - `span`
+>   
+>   This attribute contains a positive integer indicating the number of consecutive columns the `<colgroup>` element spans. **(Default: 1)**
+>   
+>   Note: not permitted if more than 1 `<col>` elements within the `<colgroup>`
+
+**`<data>` - data**, [MDN Reference](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/data)
+
+> Links a given content with a machine-readable translation. If the content is time- or date-related, the `<time>` element must be used.
+> 
+> **Attributes**
+> 
+> - `value`
+>   
+>   TThe machine-readable translation of the content of the element.
+
+**`<datalist>` - HTML Data List**, [MDN Reference](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/datalist)
+
+> A set of `<options` elements that represent the permissible or recommended options available to choose from within other controls.
+> 
+> **Attributes**
+> 
+> Global attributes only.
+
+**`<dd>` - Description Details**, [MDN Reference](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dd)
+
+> Provides the description, definition, or value for the preceding term (`<dt>`) in a description list (`<dl>`)
+> 
+> **Attributes**
+> 
+> Global attributes only.
+
+**`<del>` - Deleted Text**, [MDN Reference](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/del)
+
+> Represents a range of text that has been deleted from a document. This can be used when rendering "track chagnes" or source code diff information.
+> 
+> **Attributes**
+> 
+> - `cite`
+>   
+>   A URI for a resource that explains the change. (e.g. meeting minutes)
+> 
+> - `datetime`
+>   
+>   Indicates the time and date of the change, must be a valid date string with an optional time.
+
+**`<details>` - Details Disclosure**, [MDN Reference](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details)
+
+> Creates a disclosure widget in which information is visible only when the widget is toggled into an "open" state. A summary or label can be provided using the `<summary>` element.
+> 
+> A disclosure widget is typically presented onscreen using a small trangle which rotates to indicate open/clsoed status, with a label next to the triangle.
+> 
+> If the first child of the `<details>` element is a `<summary>` element, the contents of the `<sumamry>` element are used as the label for the disclosure widget.
+> 
+> **Attributes**
+> 
+> - `open`
+>   
+>   A Boolean attribute indicates whether or not hte details are visible. **(Default: false)**
+> 
+> **Events**
+> 
+> - `toggle`
+
+**`<dfn>` - Definition**, [MDN Reference](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dfn)
+
+> Indicate the term being defined within the context of a definition phrase or sentence. The `<p>` element, the `<dt>`/`<dd>` pairing, or the `<section>` element which is the nearest ancestor of the `<dfn>` is considered to be the definition of the term.
+> 
+> **Attributes**
+> 
+> Global attributes only.
+> 
+> **Usage**
+> 
+> The term being defined is identified following these rules:
+> 
+> 1. If the `<dfn>` element has a `title` attribute, the value of the `title` attribute is considered to be the term being defined. The element must still have text within it, but that text may be an abbreviation (perhaps using `<abbr>`) or another form of the term.
+> 
+> 2. If the `<dfn>` contains a single child element and does not have any text content of its own, and the child element is an `<abbr>` element with a `title` attribute itself, then the exact value of the `<abbr>` element's `title` is the term being defined.
+> 
+> 3. Otherwise the text content of the `<dfn>` element is the term being defined.
+
+**`<div>` - Content Division**, [MDN Reference](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div)
+
+> Generic container for flow content. It has no effect on the content or layout until styled using CSS.
+> 
+> As a "pure" container, the `<div>` element does not inherently represent anything. Instead it's used to group content so it can be easily styled using the `class` or `id` attributes, marking a section of a document as being written in a different language (using the `lang` attribute), and so on.
+> 
+> **Attributes**
+> 
+> Global attributes only.
+
+**`<dl>` - Description List**, [MDN Reference](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dl)
+
+> Represents a description list. The element encloses a list of groups of terms (specified using the `<dt>` element) and descriptions (provided by `<dd>` elements).
+> 
+> Common uses for this element are to implement a glossary or to display metadata.
+> 
+> **Attributes**
+> 
+> Global attributes only.
+> 
+> **Usage**
+> 
+> It's a bad practice to use `<dl>` for the purpose of creating indentation on the page. For proper indentation use CSS `margin`.
+
+**`<dt>` - Description Term**, [MDN Reference](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dt)
+
+> Specifies a term in a description or definition list, must be used inside a `<dl>` element. Usually followed by a `<dd>` element, multiple `<dt>` elements in a row indicate several terms that are all defined by the same immediate next `<dd>` element.
+> 
+> **Attributes**
+> 
+> Global attributes only.
+
+**`<em>` - Emphasis**, [MDN Reference](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/em)
+
+> Marks text that has stress emphasis.
+> 
+> Can be nested, each level of nesting indicating a greater degree of emphasis.
+> 
+> **Attributes**
+> 
+> Global attributes only.
+> 
+> **Usage**
+> 
+> Used for words that have a stressed emphasis compared to surrounding text, which is often limited to a word or words of a sentence and affects the meaning of the sentence itself.
+> 
+> Shouldn't be used to only display text in italic.
+> 
+> `<em>` is used to represent stress emphasis of its content, `<i>` is used to represent text that is set off from the normal prose, such a foreign word, fictional character thoughts, or definition of a word instead of representing its semantic meaning.
+
+**`<embed>` - Embed External Content**, [MDN Reference](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/embed)
+
+> Embeds external content at the specified point in the document.
+> 
+> This content is provided by an external application or other source of interactive content such as a browser plug-in.
+> 
+> **Attributes**
+> 
+> - `height`
+>   
+>   Height of the resource in CSS pixels. Must be an absolute value not percentage.
+> 
+> - `src`
+>   
+>   The URL of the resource being embedded.
+> 
+> - `type`
+>   
+>   The MIME type to use to select the plug-in to instantiate.
+> 
+> - `width`
+>   
+>   Width of the resource in CSS pixels. Must be an aboslute value not percentage.
+> 
+> **Usage**
+> 
+> You can use the `object-position` property to adjust the positioning of the embedded object within the element's frame, and the `object-fit` property to control how the object's size is adjusted to fit within the frame.
+
+**`<fieldset>` - Field Set**, [MDN Reference](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/fieldset)
+
+> Used to group several controls as well as labels within a web form.
+> 
+> A nested `<legend>` element is used to provide a caption for the `<fieldset>`.
+> 
+> **Attributes**
+> 
+> - `disabled`
+>   
+>   Disable all form controls that are descendants of the fieldset, they will not be editable and won't be submitted along with the `<form>`.
+> 
+> - `form`
+>   
+>   The id of the form this `<fieldset>` element is associated with.
+> 
+> - `name`
+>   
+>   The name associated with the group.
+
+**`<figcaption>` - Figure Caption**, [MDN Reference](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/figcaption)
+
+> Represents a caption or legend describing the rest of the contents of its parent `<figure>` element.
+> 
+> **Attributes**
+> 
+> Global attributes only.
+
+**`<figure>` - Figure with Optional Caption**, [MDN Reference](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/figure)
+
+> Represents self-contained content, potentially with an optional caption specified using `<figcaption>` element.
+> 
+> The figure and its caption and its contents are referenced as a single unit.
+> 
+> **Attributes**
+> 
+> Global attributes only.
+> 
+> **Usage**
+> 
+> Usually a `<figure>` is an image, illustration, diagram, code snippet, etc., that is referenced in the main flow of a document, but that can be moved to another part of the document or to an appendix without affecting the main flow.
+> 
+> Being a sectioning root, the outline of the content of the `<figure>` element is excluded from the main outline of the document.
+> 
+> A caption can be associated with the `<figure>` element by inserting a `<figcaption>` inside it (as the first or last child). The first `<figcaption>` element found in the figure is presented as the figure's caption.
+
+**`<footer>` - footer**, [MDN Reference](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/footer)
+
+> Represents a fotoer for its nearest sectioning content or sectioning root element. A footer typically contains information about the author of the section, copyright data or links to related documents.
+> 
+> **Attributes**
+> 
+> Global attributes only.
+> 
+> **Usage**
+> 
+> Enclose information about te author in an `<address>` element that can be included into the `<footer>` element.
+> 
+> The `<footer>` element is not sectioning content and therefore doesn't introduce a new section in the outline.
