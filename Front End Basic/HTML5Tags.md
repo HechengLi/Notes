@@ -829,3 +829,251 @@ Information are from [here](https://developer.mozilla.org/en-US/docs/Web/HTML).
 > Enclose information about te author in an `<address>` element that can be included into the `<footer>` element.
 > 
 > The `<footer>` element is not sectioning content and therefore doesn't introduce a new section in the outline.
+
+**`<form>` - form**, [MDN Reference](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form)
+
+> Represents a document section that contains interactive controls for submitting information to a web server.
+> 
+> It's possible to use `:valid` and `:invalid` CSS pseudo-classes to style a `<form>` element based on whether or not the individual elements within the form are valid.
+> 
+> **Attributes**
+> 
+> - `accept-charset`
+>   
+>   A space- or comma-delimited list of character encodings that the server accepts. The browser uses them in the order in which they are listed. The default value, the reserved string `"UNKNOWN"` indicates the same encoding as that of the document containing the form element.
+> 
+> - `action`
+>   
+>   The URI of a program that processes the form information.
+>   
+>   Can be overridden by a `formaction` attribute on a `<button>`, `<input type="submit">` or `<input type="image">` element.
+> 
+> - `autocomplete`
+>   
+>   Indicates whether input elements can be default have their values automatically completed by the browser. This setting can be overridden by an `autocompleted` attribute on an element beloing to the form.
+>   
+>   - `off`
+>   
+>   - `on`
+>   
+>   For most modern browsers setting  the autocomplete attribute will not prevent a browser's password manager from asking the user if they want to store login fields, if the user permits the storage the browser will autofill the login the next time the user visits the page.
+> 
+> - `enctype`
+>   
+>   When the value of the `method` attribute is `post`, enctype is the MIME type of content that is used to submit the form to the server.
+>   
+>   Possible values
+>   
+>   - `application/x-www-form-urlencoded`: Default
+>   
+>   - `multipart/form-data`: Value used if an `<input>` element has type "file"
+>   
+>   - `text/plain`: (HTML5)
+>   
+>   Can be overriden by a `formenctype` attribute on a `<button>`, `<input type="submit">` or `<input type="image">` element.
+> 
+> - `method`
+>   
+>   The HTTP method that the browser uses to submit the form.
+>   
+>   Possible values
+>   
+>   - `post`: HTTP POST method, form data are included in the body of the form and sent to the server.
+>   
+>   - `get`: HTTP GET method, from data are appended to the `action` attribute URI with a '?' as separator, and the resulting URI is sent to the server.
+>   
+>   Can be overridden by a `formmethod` attribute on a `<button>`, `<input type="submit">` or `<input type="image">` element.
+> 
+> - `name`
+>   
+>   The name of the form.
+> 
+> - `novalidate`
+>   
+>   A Boolean attribute indicates that the form is not to be validated when submitted.
+>   
+>   Can be overridden by a `formmethod` attribute on a `<button>`, `<input type="submit">` or `<input type="image">` element.
+> 
+> - `target`
+>   
+>   Where to display the response after receiving after submitting the form.
+>   
+>   The following keywords have special meanings for where to load the URL:
+>   
+>   - `_self`: the current browsing context. **(Default)**
+>   
+>   - `_blank`: usually a new tab, but users can configure browser to open a new window instead.
+>   
+>   - `_parent`: the parent browsing context of the current one. If no parent, behaves as `_self`.
+>   
+>   - `_top`: the topmost browsing context (the "highest" context that's an ancestor of the current one). If not acestors, behaves as `_self`.
+
+**`<h1>-<h6>` - HTML Section Heading**, [MDN Reference](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Heading_Elements)
+
+> Represents six levels of section headings. `<h1>` is the highest and `<h6>` is the lowest.
+> 
+> **Attributes**
+> 
+> Global attributes only.
+> 
+> **Usage**
+> 
+> Heading information may be used by user agents, for example, to construct a table of contents for a document automatically.
+> 
+> Avoid using heading tags to resize text, use CSS `font-size` instead.
+> 
+> Avoid skipping heading levels, start from `<h1>`, then `<h2>` and so on.
+> 
+> Should not use more than 1 `<h1>` per page.
+
+**`<head>` - Document Metadata (Header)**, [MDN Reference](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/head)
+
+> Contains machine-readable information (metadata) about the document, like its title, scripts, and stylesheets.
+> 
+> **Attributes**
+> 
+> Global attributes only.
+> 
+> **Notes**
+> 
+> HTML5-compliant browsers automatically creates a `<head>` element if its tags are omitted in the markup.
+
+**`<header>` - header**, [MDN Reference](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/header)
+
+> Represents introductory content, typically a group of introductory or navigational aids, such as heading elements, logo, search form, author name, and other elements.
+> 
+> **Attributes**
+> 
+> Global attributes only.
+
+**`<hr>` - Thematic Break (Horizontal Rule)**, [MDN Reference](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/hr)
+
+> Represents a thematic break between paragraph-level elements: for example, a change of scene in a story, or a shift of topic within a section.
+> 
+> **Attributes**
+> 
+> Global attributes only.
+
+**`<html>` - HTML Document / Root**, [MDN Reference](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/html)
+
+> The root (top-level element) of an HTML document, also referred to as the root element.
+> 
+> **Attributes**
+> 
+> - `xmlns`
+>   
+>   Specifies the XML Namespace of the document. **(Default: `"http://www.w3.org/1999/xhtml")**
+>   
+>   Required in documents parsed with XML parsers, optional in text/html documents.
+
+**`<i>` - i**, [MDN Reference](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/i)
+
+> Represents a range of text that is set off from the normal text for some reason. For example technical terms, foreign language phrases, or fictional character thoughts.
+> 
+> **Attributes**
+> 
+> Global attributes only.
+
+**`<ifram>` - Inline Frame**, [MDN Reference](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe)
+
+> A nested browsing context, embedding another HTML page into the current one.
+> 
+> Each embedded browsing context has its own session history and document. The browsing context that embeds the others is called the **parent browsing context**. The **topmost** browsing context is usually the browser window, represented by the `Window` object.
+> 
+> **Attributes**
+> 
+> - `allow`
+>   
+>   Specifies a feature policy for the `<iframe>`
+> 
+> - `allowfullscreen`
+>   
+>   Set `true` if the `<iframe>` can activate fullscreen mode by calling the `requestFullscreen()` method.
+> 
+> - `allowpaymentrequest`
+>   
+>   Set `true` if a cross-origin `<iframe>` should be allowed to invoke the **Payment Request API**.
+> 
+> - `height`
+>   
+>   Height of the frame in CSS pixels. **(Default: 150px)**
+> 
+> - `name`
+>   
+>   A targetable name for the embedded browsing context. This can be used in the `target` attribute of the `<a>`, `<form>`, or `<base>` elements, the `formtarget` attribute of the `<input>` or `<button>` elements, or the `windowName` parameter in the `window.open()` method.
+> 
+> - `referrerpolicy`
+>   
+>   Indicates which referrer to send when fetching the frame's resource
+>   
+>   - `no-referrer`: The `Referer header will not be send.
+>   
+>   - `no-referrer-when-downgrade` (default): The `Referer` header will not be sent to origins without TLS (HTTPS).
+>   
+>   - `origin`: The send referrer will be limited to the origin of the referring page: its scheme, host, and port.
+>   
+>   - `origin-when-cross-origin`: The referrer sent to other origins will be limited to the scheme, the host, and the port. Navigations on the same origin will still include the path.
+>   
+>   - `same-origin`: A referrer will be sent for same origin, but cross-origin requests will contain no referrer information.
+>   
+>   - `strict-origin`: Only send the origin of the document as the referrer when the protocol security level stays the same (HTTPS->HTTPS), but don't send it to a less secure destination (HTTPS->HTTP).
+>   
+>   - `strict-origin-when-cross-origin`: Send a full URL when performing a same-origin request, only send the origin when the protocol security level stays the same (HTTPS->HTTPS), and send no header to a less secure destination (HTTPS->HTTP).
+>   
+>   - `unsafe-url`: The referrer will include the origin and the path (but no the fragment, password, or username). This value is unsafe, because it leaks origins and paths from TLS-protected resources to insecure origins.
+> 
+> - `sandbox`
+>   
+>   Applies extra restrictions to the content in the frame. The value of the attribute can either be empty to apply all restrictions, or space-separated tokens to lift particular restrictions
+>   
+>   - `allow-downloads-without-user-activation` : Allows for downloads to occur without a gesture from the user.
+>   
+>   - `allow-forms`: Allows the resource to submit forms. If this keyword is not used, form submission is blocked.
+>   
+>   - `allow-modals`: Lets the resource open modal windows.
+>   
+>   - `allow-orientation-lock`: Lets the resource lock the screen orientation.
+>   
+>   - `allow-pointer-lock`: Lets the resource use the Pointer Lock API.
+>   
+>   - `allow-popups`: Allows popups (such as `window.open()`, `target="_blank"`, or `showModalDialog()`). If this keyword is not used, the popup will silently fail to open.
+>   
+>   - `allow-popups-to-escape-sandbox`: Lets the sandboxed document open new windows without those windows inheriting the sandboxing. For example, this can safely sandbox an advertisement without forcing the same restrictions upon the page the ad links to.
+>   
+>   - `allow-presentation`: Lets the resource start a presentation session.
+>   
+>   - `allow-same-origin`: If this token is not used, the resource is treated as being from a special origin that always fails the same-origin policy.
+>   
+>   - `allow-scripts`: Lets the resource run scripts (but not create popup windows).
+>   
+>   - `allow-storage-access-by-user-activation` : Lets the resource request access to the parent's storage capabilities with the Storage Access API.
+>   
+>   - `allow-top-navigation`: Lets the resource navigate the top-level browsing context (the one named `_top`).
+>   
+>   - `allow-top-navigation-by-user-activation`: Lets the resource navigate the top-level browsing context, but only if initiated by a user gesture.
+> 
+> - `src`
+>   
+>   The URL of the page to embed. Use a value of `about:blank` to embed and empty page that conforms to the same-origin policy.
+> 
+> - `srcdoc`
+>   
+>   Inline HTML to embed, overriding the `src` attribute. If a browser does not support the `srcdoc` attribute, it will fall back to the URL in the `src` attribute.
+> 
+> - `width`
+>   
+>   Width of the frame in CSS pixels. **(Default: 300px)**
+> 
+> **Scripting**
+> 
+> Inline frames, like `<frame>` elements, are included in the `window.frames` pseudo-array.
+> 
+> With the DOM `HTMLIFrameElement` object, scripts can access the `window` object of the framed resource via the `contentWindow` property. The `contentDocument` property refers to the `document` inside the `<iframe>`, same as `contentWindow.document`.
+> 
+> From the inside of a frame, a script can get a reference to its parent window with `window.parent`.
+> 
+> Script access to a frame's content is subject to the same-origin policy. Scripts cannot access most properties in other `window` objects if the script was loaded from a different origin, including scripts inside a frame accessing the frame's parent. Cross-origin communication can be achieved using `Window.postMessage()`
+
+
+
+
