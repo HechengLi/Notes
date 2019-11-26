@@ -211,3 +211,56 @@ useEffect(() => {
     document.title = count
 }, [count]) // Only re-run the effect if count changes
 ```
+
+#### React Router
+
+The standard routing library for React.
+
+Getting started, wrap `<App />` in index.js with `router` component.
+
+```js
+ReactDOM.render(
+    <BrowserRouter> // can also be other routers such as HashRouter
+        <App />
+    </BrowserRouter>,
+    ...
+)
+```
+
+Using `<Switch>` to wrap component to render on specific path.
+
+```js
+<Switch>
+    <Route path="/link"> // render this when link is "/link"
+        <MyComponent />
+    </Route>
+</Switch>
+```
+
+Use `<NavLink>` component to tell react router to redirect to a path.
+
+```js
+<NavLink to="/link">Link</NavLink> // this redirects to "/link"
+```
+
+Use `<Redirect>` to navigate to a new location.
+
+When `<Redirect>` is rendered, it will navigate to the location specified, this is how to redirect programmatically in React.
+
+```js
+<Redirect to="/link" />
+```
+
+#### JSX
+
+Note on .jsx:
+
+    According to `create-react-app`, `.jsx` format was useful before `babel`, in current time `.jsx` is not necessary anymore and not recommanded by `create-react-app`. Most editors can be configured to use JSX-capable syntax scheme for `.js` file.
+
+_The distinction between `.js` and `.jsx` files was useful before Babel, but it’s not that useful anymore._
+
+[reference][1]
+
+[1]: https://github.com/facebook/create-react-app/issues/87#issuecomment-234627904 "reference"
+
+
