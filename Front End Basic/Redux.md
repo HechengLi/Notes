@@ -341,3 +341,42 @@ function selectFactory(dispatch) {
 
 export default connectAdvanced(selectorFactory)(TodoApp)
 ```
+
+###### Async Flow
+
+Redux store only supports _synchronous data flow_, but you can enhance `createStore()
+
+ with `applyMiddleware()` to express `asynchronous actions` in a convenient way.
+
+Example of a middleware is `redux-thunk`
+
+How to create store
+
+```js
+const INCREMENT_COUNTER = 'INCREMENT_COUNTER' // action type
+```
+
+Creating async  action
+
+```js
+function increment() { // action creator
+    return {
+        type: INCREMENT_COUNTER
+    }
+}
+
+function incrementAsync() { // async action creator
+    return dispatch => {
+        setTimeout(() => {
+            dispatch(increment)
+        }, 1000)
+    }
+}
+
+const Counter = connect( // bind as prop
+    null,
+    incrementAsync
+)(Number)
+```
+
+
