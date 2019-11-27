@@ -262,5 +262,3 @@ _The distinction between `.js` and `.jsx` files was useful before Babel, but itâ
 [reference][1]
 
 [1]: https://github.com/facebook/create-react-app/issues/87#issuecomment-234627904 "reference"
-
-
