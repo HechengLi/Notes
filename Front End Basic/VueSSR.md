@@ -63,7 +63,7 @@ server.get('*', (req, res) => {
         },
         template: `<div>The visited URL is: {{ url }}</div>`
     })
-    
+
     // step 3
     renderer.renderToString(app)
         .then(html => {
@@ -119,7 +119,7 @@ Edit `index.template.html`
     <head>
         <!-- use double mustache for HTML-escaped interpolation -->
         <title>{{ title }}</title>
-        
+
         <!-- use triple mustache for non-HTML-escaped interpolation -->
         {{{ meta }}}
     </head>
@@ -211,7 +211,7 @@ const createApp = require('./app')
 server.get('*', (req, res) => {
     const context = { url: req.url }
     const app = createApp(context)
-    
+
     renderer.renderToString(app)
         .then(html => {
             res.end(html)
@@ -321,13 +321,13 @@ import { createRouter } from './router'
 export function createApp() {
     // create router instance
     const router = createRouter()
-    
+
     const app = new Vue({
         // inject under into root Vue instance
         router,
         render: h => h(App)
     })
-    
+
     // return both the app and the router
     return { app, router }
 }
@@ -342,10 +342,10 @@ export default context = {
     // since there could potentially be asynchronous route hooks or components, we will be returning a Promise so that the server can wait until everything is ready before rendering
     return new Promise((resolve, reject) => {
         const { app, router } = createApp()
-        
+
         // set server-side router's location
         router.push(context.url)
-        
+
         // wait until router has resolved possible async components and hooks
         router.onReady(() => {
             const matchedComponents = router.getMatchedComponents()
@@ -353,7 +353,7 @@ export default context = {
             if (!matchedComponents.length) {
                 return reject({ code: 404 })
             }
-            
+
             // the Promise should resolve to the app instance so it can be rendered
             resolve(app)
         }, reject)
@@ -370,7 +370,7 @@ const createApp = require('/path/to/built-server-bundle.js')
 
 server.get('*', (req, res) => {
     const context = { url: req.url }
-    
+
     createApp(context)
         .then(app => {
             renderer.renderToString(app)
@@ -388,4 +388,265 @@ server.get('*', (req, res) => {
 })
 ```
 
+###### Code-Splitting
 
+Code-splitting, or lazy-loading part of your app helps reduce the amount of assets that need to be downloaded by the browser for the initial render, can greatly improve TTI (time-to-interactive) for apps with large bundles.
+
+Vue provides async components as first-class concept, combining with webpack's dynamic import as a code-split point.
+
+```js
+// change this
+import Foo from './Foo.vue'
+// to this
+const Foo = () => import('./Foo.vue')
+```
+
+Note: prior Vue 2.5 this only worked for route-level components.
+
+Edit `entry-client.js` and add `router.onReady()` before mounting because the router must resolve async route components ahead of time in order to properly invoke in-component hooks.
+
+```js
+import { createApp } from './app'
+const { app, router } = createApp()
+router.onReady(() => {
+    app.$mount('#app')
+})
+```
+
+#### Data Pre-Fetching And State
+
+###### Data Store
+
+During SSR, we are essentially rendering a "snapshot" of out app. The asynchronous data from our components needs to be available before we mount the client side app.
+
+To address this, the fetched data needs to live outside of the view components. On the server, we can pre-fetch and fill data into the store while rendering. In addition, we will serialize and inline the state in the HTML after the app has finished rendering. The client-side store can directly pickup the inlined state before we mount the app.
+
+We will use `Vuex` for this purpose.
+
+First create `store.js` file
+
+```js
+import Vue from 'vue'
+import Vuex from 'vuex'
+
+Vue.use(Vuex)
+
+// assume this is an universal api that returns a promise
+import { fetchItem } from './api'
+
+export function createStore() {
+    return new Vuex.Store({
+        // IMPORTANT: state must be a function so module can be instantiated multiple times
+        state: () => ({
+            items: {}
+        }),
+        actions: {
+            fetchItem({ commit }, id) {
+                // return the Promise via `store.dispatch()` so that we know when the data has been fetched
+                return fetchItem(id).then(item => {
+                    commit('setItem', { id, item })
+                })
+            }
+        },
+        mutations: {
+            setItem(state, { id, item }) {
+                Vue.set(state.items, id, item)
+            }
+        }
+    })
+}
+```
+
+Edit `app.js`
+
+```js
+import Vue from 'vue'
+import App from './App.vue'
+import { createRouter } from './router'
+import { createStore } from './store'
+import { sync } from 'vuex-router-sync'
+
+export function createApp() {
+    // create router and store instances
+    const router = createRouter()
+    const store = createStore()
+    
+    // sync so that the state is available as part of the store
+    sync(store, router)
+    
+    // create the app instance, injecting both the router and the state
+    const app = new Vue({
+        router,
+        store,
+        render: h=> h(App)
+    })
+    
+    // expose the app, the router and the store
+    return { app, router, store }
+}
+```
+
+###### Logic Collocation With Components
+
+The data we need to fetch is determined by the route visited, so it would be natural to place the data fetching logic inside route components.
+
+Components in Vue 2.6.0+ have a `serverPrefetch` option that pauses the rendering until the promises it returns is resolved. This allows us to "wait" on the async data during the rendering process.
+
+Create a `Item.vue` file that renders  at `/item/:id` route.  Since the component instance is already created at this point, it has access to `this`
+
+```js
+<template>
+    <div v-if="item">{{ item.title }}</div<
+    <div v-else>...</div>
+</template>
+
+<script>
+    export default {
+        computed: {
+            // display the item from store state
+            item() {
+                return this.$store.state.items[this.$route.params.id]
+            }
+        },
+        // server-side only
+        // this will be called by the server renderer automatically
+        serverPrefetch() {
+            // return the Promise from the action so the component waits before rendering
+            return this.fetchItem()
+        },
+        // client-side only
+        // we fetch the item (will first show the loading text)
+        mounted() {
+            if (!this.item) { // check if the component is server-side rendered to avoid duplicated request
+                this.fetchItem()
+            }
+        },
+        methods: {
+            fetchItem() {
+                // return the Promise from the action
+                return this.$store.dispatch('fetchItem', this.$route.params.id)
+            }
+        }
+    }
+```
+
+###### Final State Injection
+
+After the rendering process finishes waiting for data fetching, attach a `rendered` callback to the render context (new in 2.6), which the server renderer will call when the entire rendering process is finished.
+
+At this moment, the store should have been filled with the final state. We can inject it on to the context in that callback.
+
+Edit `entry-server.js`
+
+```js
+import { createApp } from './app'
+
+export default context => {
+    return new Promise((resolve, reject) => {
+        const { app, router, store } = createApp()
+        router.push(context.url)
+        router.onReady(() => {
+            // this `rendered ` hook is called when the app has finished rendering
+            context.rendered = () => {
+                // After the app is rendered, our store is now filled with the state from our components. when we attach the state to the context, and the `template` option is used for the renderer, the state will automatically be serialized and injected into the HTML as `window.__INITIAL_STATE__`
+                resolve(app)
+            }
+        }, reject)
+    })
+}
+```
+
+When using `template`, `context.state` will automatically be embedded in the final HTML as `window.__INITIAL_STATE__` state. On the client, the store should pick up the state before mounting the application
+
+Edit `entry-client.js`
+
+```js
+import { createApp } from './app'
+const { app, store } = createApp()
+if (window.__INITIAL_STATE__) {
+    // we initialize the store state with the data injected from the server
+    store.replaceState(window.__INITIAL_STATE__)
+}
+app.$mount('#app')
+```
+
+###### Store Code Splitting
+
+In a large application, Vuex store will likely be split into multiple modules. Ofcourse it is also possible to code-split these modules into corresponding route component chunks.
+
+Suppose we have the following store module `store/modules/foo.js`
+
+```js
+export default {
+    namespaced: true,
+    // IMPORTANT: state must be a function so the module can be instantiated multiple times
+    state: () => ({
+        count: 0
+    }),
+    actions: {
+        inc: ({ commit }) => commit('inc')
+    },
+    mutations: {
+        inc: state => state.count++
+    }
+}
+```
+
+We can use `store.registerModule` to lazy-register this module in a route component's `serverPrefetch` hook
+
+`component/Foo.vue`
+
+```js
+<template>
+    <div>{{ fooCount }}</div>
+</template>
+
+<script>
+// import the module here instead of in `store/index.js`
+import fooStoreModule from '../store/modules/foo'
+
+export default {
+    computed: {
+        fooCount() {
+            return this.$store.state.foo.count
+        }
+    },
+    
+    serverPrefetch() {
+        this.registerFoo()
+        return this.fooInc()
+    },
+    
+    mounted() {
+        // we already incremented 'count' on the server
+        // we know by checking if the 'foo' state already exists
+        const alreadyIncremented = !!this.$store.state.foo
+        
+        // we register the foo module
+        this.registerFoo()
+        if (!alreadyIncremented) {
+            this.fooInc()
+        }
+    },
+    
+    // IMPORTANT: avoid duplicate module registration on the client when the route is visited multiple times
+    destroyed() {
+        this.$store.unregisterModule('foo')
+    },
+    
+    methods: {
+        registerFoo() {
+            // preserve the previous state if it was injected from the server
+            this.$store.registerModule('foo', fooStoreModule, { preserveState: true })
+        },
+        
+        fooInc() {
+            this.$store.dispatch('foo/inc')
+        }
+    }
+}
+```
+
+Because the module is now a dependency of the route component, it will be moved into the route component's async chunk by webpack.
+
+#### Client Side Hydration
