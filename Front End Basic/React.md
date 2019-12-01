@@ -171,7 +171,7 @@ Each component has several "lifecycle methods" that can be overriden to run code
 
 Image of lifecycle
 
-![react_lifecycle_cheetsheet.JPG](C:\Users\Accuenergy- Chris\Desktop\Notes\Front End Basic\React Assets\react_lifecycle_cheetsheet.JPG)
+![react_lifecycle_cheetsheet.JPG](./React Assets/react_lifecycle_cheetsheet.JPG)
 
 #### Hooks
 

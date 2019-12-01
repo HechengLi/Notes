@@ -326,10 +326,10 @@ import { bindActionCreators } from 'redux'
 function selectFactory(dispatch) {
     let ownProps = {}
     let result = {}
-    
+
     const actions = bindActionCreators(actionCreators, dispatch)
     const addTodo = text => actions.addTodo(ownProps.userId, text)
-    
+
     return (nextState, nextOwnProps) => {
         const todos = nextState.todos[nextOwnProps.userId]
         const nextResult = { ...nextOwnProps, todo, addTodo }
@@ -378,5 +378,3 @@ const Counter = connect( // bind as prop
     incrementAsync
 )(Number)
 ```
-
-
