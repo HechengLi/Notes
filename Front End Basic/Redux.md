@@ -344,7 +344,7 @@ export default connectAdvanced(selectorFactory)(TodoApp)
 
 ###### Async Flow
 
-Redux store only supports _synchronous data flow_, but you can enhance `createStore()
+Redux store only supports _synchronous data flow_, but you can enhance `createStore()`
 
  with `applyMiddleware()` to express `asynchronous actions` in a convenient way.
 
